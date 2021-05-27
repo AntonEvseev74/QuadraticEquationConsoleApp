@@ -1,6 +1,5 @@
 package ru.evant.quadratic_equation;
 
-import javax.management.StringValueExp;
 import java.util.Scanner;
 
 /**
@@ -27,9 +26,14 @@ import java.util.Scanner;
 
 // Ошибки
 //  Реализовать проверку ввода пользователя (если пользователь ввел не число)
-    // Реализовать решение простого уравнения
 
 public class Main {
+
+    /*
+          Объявить переменные для хранения вещественных чисел, тип переменных - double.
+          Необходимые для вычислений
+         */
+    static double a, b, c, D, x, x1, x2;
 
     public static void main(String[] args) {
 
@@ -38,12 +42,6 @@ public class Main {
     }
 
     private static void solveQuadraticEquation() {
-
-        /*
-          Объявить переменные для хранения вещественных чисел, тип переменных - double.
-          Необходимые для вычислений
-         */
-        double a, b, c, D, x, x1, x2;
 
         /*
           Объявить и инициализировать ссылочные перменные строкового типа, тип - String.
@@ -71,6 +69,7 @@ public class Main {
         System.out.println(formula);      // вывод в консоль. формула
 
         /* 1. Получить данные от пользователя */
+        /* A */
         System.out.print(enterValueA);  // вывод в консоль. запрос данных
         a = userInput.nextDouble();     // получить данные введенные пользователем и присвоить их переменной a
         // Проверить поле ввода, если не пустое выполняем код далее, иначе присваиваем переменной значение 1
@@ -93,8 +92,10 @@ public class Main {
                 sectionA = "" + a + "x²";
             }
         }
+
+        /* B */
         System.out.print(enterValueB);  // вывод в консоль. запрос данных
-        b = userInput.nextDouble();     // получить данные введенные пользователем и присвоить их переменной b
+            b = userInput.nextDouble();     // получить данные введенные пользователем и присвоить их переменной b
         if (String.valueOf(b).length() != 0) {
             if (b > 0) {
                 sectionB = "+" + b + "x";
@@ -113,9 +114,10 @@ public class Main {
                 sectionB = "" + b + "x";
             }
         }
+        /* C */
         System.out.print(enterValueC);  // вывод в консоль. запрос данных
         c = userInput.nextDouble();     // получить данные введенные пользователем и присвоить их переменной c
-        if (String.valueOf(b).length() != 0) {
+        if (String.valueOf(c).length() != 0) {
             if (c > 0) {
                 section3 = "+" + c + "=0";
             } else if (c == 0) {
@@ -145,7 +147,9 @@ public class Main {
             System.out.println(equation);
         } else if (a == 0) {
             /* решить простое уравнение */
-
+            x = -c / b;
+            System.out.println(equation);
+            System.out.println("x=" + x);
         } else {
             D = Math.pow(b, 2) - 4 * a * c; // Math.pow(b,2) -> использовать метод pow(x, n) класса Math -> pow - возвести число в степень, x - число, n - степень
             dD = "D = " + D;
@@ -171,5 +175,7 @@ public class Main {
             }
         }
     }
+
+
 }
 
