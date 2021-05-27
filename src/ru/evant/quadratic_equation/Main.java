@@ -72,79 +72,67 @@ public class Main {
         System.out.print(enterValueA);  // вывод в консоль. запрос данных
         a = userInput.nextDouble();     // получить данные введенные пользователем и присвоить их переменной a
         // Проверить поле ввода, если не пустое выполняем код далее, иначе присваиваем переменной значение 1
-        if (String.valueOf(a).length() != 0) {
+        if (isNotEmpty(a)) {
             /* проверка на знак оператора + или -, или равенство нулю */
-            if (a > 0) {
+            if (isPositive(a)) {
                 sectionA = "" + a + "x²";
-            } else if (a == 0) {
+            }
+            if (isZero(a)) {
                 sectionA = "";
-            } else {
+            }
+            if (isNegative(a)) {
                 sectionA = "" + a + "x²";
             }
         } else {
             a = 1;
-            if (a > 0) {
-                sectionA = "" + a + "x² ";
-            } else if (a == 0) {
-                sectionA = "";
-            } else {
-                sectionA = "" + a + "x²";
-            }
+            sectionA = "" + a + "x² ";
         }
 
         /* B */
         System.out.print(enterValueB);  // вывод в консоль. запрос данных
         b = userInput.nextDouble();     // получить данные введенные пользователем и присвоить их переменной b
-        if (String.valueOf(b).length() != 0) {
-            if (b > 0) {
+        if (isNotEmpty(b)) {
+            if (isPositive(b)) {
                 sectionB = "+" + b + "x";
-            } else if (b == 0) {
+            }
+            if (isZero(b)) {
                 sectionB = "";
-            } else {
+            }
+            if (isNegative(b)) {
                 sectionB = "" + b + "x";
             }
         } else {
             b = 1;
-            if (b > 0) {
-                sectionB = "+" + b + "x";
-            } else if (b == 0) {
-                sectionB = "";
-            } else {
-                sectionB = "" + b + "x";
-            }
+            sectionB = "+" + b + "x";
         }
         /* C */
         System.out.print(enterValueC);  // вывод в консоль. запрос данных
         c = userInput.nextDouble();     // получить данные введенные пользователем и присвоить их переменной c
-        if (String.valueOf(c).length() != 0) {
-            if (c > 0) {
+        if (isNotEmpty(c)) {
+            if (isPositive(c)) {
                 section3 = "+" + c + "=0";
-            } else if (c == 0) {
+            }
+            if (isZero(c)) {
                 section3 = "=0";
-            } else {
+            }
+            if (isNegative(c)) {
                 section3 = "" + c + "=0";
             }
         } else {
             c = 1;
-            if (c > 0) {
-                section3 = "+" + c + "=0";
-            } else if (c == 0) {
-                section3 = "=0";
-            } else {
-                section3 = "" + c + "=0";
-            }
+            section3 = "+" + c + "=0";
         }
 
-        if (a == 0 && b == 0 && c == 0) {
+        if (isZero(a, b, c)) {
             equation = "0 = 0";
         } else {
             equation = sectionA + sectionB + section3;
         }
 
         /* 2. Вычислить Дискриминант */
-        if (a == 0 && b == 0 && c == 0) {
+        if (isZero(a, b, c)) {
             System.out.println(equation);
-        } else if (a == 0) {
+        } else if (isZero(a)) {
             /* решить простое уравнение */
             x = -c / b;
             System.out.println(equation);
@@ -155,11 +143,11 @@ public class Main {
 
             /* 3. Решить уравнение и 4. Вывести результат*/
 
-            if (D < 0) { /* 3.1. если (if) D < 0 */
+            if (isNegative(D)) { /* 3.1. если (if) D < 0 */
                 System.out.println(equation);
                 System.out.println(dD);
                 System.out.println(dNegative);
-            } else if (D == 0) { /* 3.2. иначе (else) если (if) D = 0 */
+            } else if (isZero(D)) { /* 3.2. иначе (else) если (if) D = 0 */
                 x = ((-1) * b) / (2 * a);
                 System.out.println(equation);
                 System.out.println(dD);
@@ -173,6 +161,31 @@ public class Main {
                 System.out.println(dPositiveX2 + x2);
             }
         }
+    }
+
+    /* Проверить пустое поле ввода или нет */
+    public static boolean isNotEmpty(double n) {
+        return String.valueOf(n).length() != 0; // если не пустое, вернуть true
+    }
+
+    /* Проверить number = 0 */
+    public static boolean isZero(double n) {
+        return n == 0; // если n = 0, вернуть true
+    }
+
+    /* Проверить 3 чисела на равенство нулю */
+    public static boolean isZero(double n1, double n2, double n3) {
+        return n1 == 0 && n2 == 0 && n3 == 0; // если все n = 0, вернуть true
+    }
+
+    /* Проверить number < 0, отрицательное число */
+    public static boolean isNegative(double n) {
+        return n < 0; // если n = 0, вернуть true
+    }
+
+    /* Проверить number > 0, положительное число */
+    public static boolean isPositive(double n) {
+        return n > 0; // если n = 0, вернуть true
     }
 }
 
