@@ -1,5 +1,7 @@
 package ru.evant.quadratic_equation;
 
+import java.util.Scanner;
+
 /**
  * Программа решает квадратные уравнения, типа
  * Ax² + Bx + C = 0
@@ -27,6 +29,32 @@ public class Main {
     public static void main(String[] args) {
 
         solveQuadraticEquation(); // Решить квадратное уравнение
+
+    }
+
+    private static void solveQuadraticEquation() {
+
+        /*
+          Объявить переменные для хранения вещественных чисел, тип переменных - double.
+          Необходимые для вычислений
+         */
+        double a, b, c, D, x, x1, x2;
+
+        /*
+          Объявить и инициализировать ссылочные перменные строкового типа, тип - String.
+          Которые ссылаются на строки указанные в "".
+          Необходимые для вывода результата
+         */
+        String dZero = "Уравнение не имеет решений!";
+        String dNegativeX = "Уравнение имеет один корень.\nx = ";
+        String dPositiveX1 = "Уравнение имеет два кореня.\nx1 = ";
+        String dPositiveX2 = "\nx2 = ";
+
+        /*
+          Создать объект -> Scanner и объявить на него ссылку -> userInput
+          Необходимо для получения данных от пользователя.
+         */
+        Scanner userInput = new Scanner(System.in);
 
     }
 }
