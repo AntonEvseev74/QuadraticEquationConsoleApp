@@ -202,6 +202,10 @@ public class Check {
         return n < 0;
     }
 
+    public static boolean isNegative(float n) {
+        return n < 0;
+    }
+
     public static boolean isNegative(double n) {
         return n < 0;
     }
@@ -212,6 +216,7 @@ public class Check {
      * true - положительное
      * false - нет
      */
+
     public static boolean isPositive(byte n) {
         return n > 0; // если n = 0, вернуть true
     } // end method isPositive(double n)
@@ -231,4 +236,47 @@ public class Check {
     public static boolean isPositive(double n) {
         return n > 0; // если n = 0, вернуть true
     } // end method isPositive(double n)
-}
+
+
+    /**
+     * Проверить тип переменной
+     */
+    public static boolean isByte(Byte n) {
+        return n instanceof Byte;
+    }
+
+    public static boolean isShort(Short n) {
+        return n instanceof Short;
+    }
+
+    public static boolean isInt(Integer n) {
+        return n instanceof Integer;
+    }
+
+    public static boolean isLong(Long n) {
+        return n instanceof Long;
+    }
+
+    public static boolean isFloat(Float n) {
+        return n instanceof Float;
+    }
+
+    public static boolean isDouble(Double n) {
+        return n instanceof Double;
+    }
+
+    /**
+     * Проверить можно ли конвертировать тип double в тип int
+     */
+    public static boolean possibleDoubleToInt(double n) {
+        return isIntegerNumber(n);
+    }
+
+    /**
+     * Проверить число, целое или нет
+     */
+    public static boolean isIntegerNumber(double n) {
+        return n % 1 == 0;
+    }
+
+} //end class
