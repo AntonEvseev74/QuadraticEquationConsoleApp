@@ -5,24 +5,34 @@ import java.util.Scanner;
 /**
  * Программа решает квадратные уравнения, типа
  * Ax² + Bx + C = 0
+ * <p>
+ * Ход выполнения задачи:
+ * 1. Получить данные от пользователя, значения переменных - A, B и С
+ * 2. Вычислить Дискриминант -> D = b² − 4ac
+ * 3. Решить уравнение
+ * 3.1. если D < 0 -> Уравнение не имеет решений
+ * 3.2. если D = 0 -> Уравнение имеет один корень ->  x = -b / 2a
+ * 3.3. если D > 0 -> Уравнение имеет  два кореня -> x1 = (-b - √D) / (2a)
+ * -> x2 = (-b - √D) / (2a)
+ * 4. Вывести результат
  */
 
-/*
-    Ход выполнения задачи:
-        1. Получить данные от пользователя, значения переменных - A, B и С
-        2. Вычислить Дискриминант -> D = b² − 4ac
-        3. Решить уравнение
-            3.1. если D < 0 -> Уравнение не имеет решений
-            3.2. если D = 0 -> Уравнение имеет один корень ->  x = -b / 2a
-            3.3. если D > 0 -> Уравнение имеет  два кореня -> x1 = (-b - √D) / (2a)
-                                                           -> x2 = (-b - √D) / (2a)
-        4. Вывести результат
-*/
+/**
+ Ход выполнения задачи:
+ 1. Получить данные от пользователя, значения переменных - A, B и С
+ 2. Вычислить Дискриминант -> D = b² − 4ac
+ 3. Решить уравнение
+ 3.1. если D < 0 -> Уравнение не имеет решений
+ 3.2. если D = 0 -> Уравнение имеет один корень ->  x = -b / 2a
+ 3.3. если D > 0 -> Уравнение имеет  два кореня -> x1 = (-b - √D) / (2a)
+ -> x2 = (-b - √D) / (2a)
+ 4. Вывести результат
+ */
 
-/*
-    Автор: Евсеев Антон
-    Создано:27 мая 2021 года
-*/
+/**
+ Автор: Евсеев Антон
+ Создано:27 мая 2021 года
+ */
 
 // Ошибки
 //  Реализовать проверку ввода пользователя (если пользователь ввел не число)
@@ -41,9 +51,9 @@ public class Main {
           Необходимые для ввода и вывода данных
          */
     static String formula = "Решение квадратных уравнений, типа:\n    Ax² + Bx + C = 0";
-    static String enterValueA = "Введите значение переменной А:\n>: ";
-    static String enterValueB = "Введите значение переменной B:\n>: ";
-    static String enterValueC = "Введите значение переменной C:\n>: ";
+    static String enterValueA = "Введите число, значение переменной А:\n>: ";
+    static String enterValueB = "Введите число, значение переменной B:\n>: ";
+    static String enterValueC = "Введите число, значение переменной C:\n>: ";
     static String equation; // уравнение
     static String sectionA, sectionB, section3; // математический оператор (+ или -)
     static String dD; // дискриминант
@@ -70,12 +80,12 @@ public class Main {
         System.out.print(enterValueA);  // вывод в консоль. запрос данных
         a = getUserInput(); //userInput.nextDouble();     // получить данные введенные пользователем и присвоить их переменной a
         // Проверить поле ввода, если не пустое выполняем код далее, иначе присваиваем переменной значение 1
-        if (isNotEmpty(a)) {
+        if (Check.isNotEmpty(a)) {
             /* проверка на знак оператора + или -, или равенство нулю */
-            if (isPositive(a)) sectionA = "" + a + "x²";
-            if (isPositive(a) && isEqualTo(a,1)) sectionA = "x²";
-            if (isZero(a)) sectionA = "";
-            if (isNegative(a)) sectionA = "" + a + "x²";
+            if (Check.isPositive(a)) sectionA = "" + a + "x²";
+            if (Check.isPositive(a) && Check.compareTwoNumbers(a, 1)) sectionA = "x²";
+            if (Check.isZero(a)) sectionA = "";
+            if (Check.isNegative(a)) sectionA = "" + a + "x²";
         } else {
             a = 1;
             sectionA = "x² ";
@@ -83,11 +93,11 @@ public class Main {
         /* B */
         System.out.print(enterValueB);  // вывод в консоль. запрос данных
         b = getUserInput(); // userInput.nextDouble();     // получить данные введенные пользователем и присвоить их переменной b
-        if (isNotEmpty(b)) {
-            if (isPositive(b)) sectionB = "+" + b + "x";
-            if (isPositive(b) && isEqualTo(b,1)) sectionB = "+x";
-            if (isZero(b)) sectionB = "";
-            if (isNegative(b)) sectionB = "" + b + "x";
+        if (Check.isNotEmpty(b)) {
+            if (Check.isPositive(b)) sectionB = "+" + b + "x";
+            if (Check.isPositive(b) && Check.compareTwoNumbers(b, 1)) sectionB = "+x";
+            if (Check.isZero(b)) sectionB = "";
+            if (Check.isNegative(b)) sectionB = "" + b + "x";
         } else {
             b = 1;
             sectionB = "+x";
@@ -95,23 +105,22 @@ public class Main {
         /* C */
         System.out.print(enterValueC);  // вывод в консоль. запрос данных
         c = getUserInput(); // userInput.nextDouble();     // получить данные введенные пользователем и присвоить их переменной c
-        if (isNotEmpty(c)) {
-            if (isPositive(c)) section3 = "+" + c + "=0";
-            if (isZero(c)) section3 = "=0";
-            if (isNegative(c)) section3 = "" + c + "=0";
+        if (Check.isNotEmpty(c)) {
+            if (Check.isPositive(c)) section3 = "+" + c + "=0";
+            if (Check.isZero(c)) section3 = "=0";
+            if (Check.isNegative(c)) section3 = "" + c + "=0";
         } else {
             c = 0;
             section3 = "=0";
         }
-        System.out.println(b);
 
-        if (isZero(a, b, c)) equation = "0 = 0";
+        if (Check.isZero(a, b, c)) equation = "0 = 0";
         else equation = sectionA + sectionB + section3;
 
         /* 2. Вычислить Дискриминант */
-        if (isZero(a, b, c)) System.out.println(equation);
+        if (Check.isZero(a, b, c)) System.out.println(equation);
 
-        if (isZero(a)) {
+        if (Check.isZero(a)) {
             /* решить простое уравнение */
             x = -c / b;
             System.out.println(equation);
@@ -122,10 +131,10 @@ public class Main {
 
             /* 3. Решить уравнение и 4. Вывести результат*/
 
-            if (isNegative(D)) { /* 3.1. если (if) D < 0 */
+            if (Check.isNegative(D)) { /* 3.1. если (if) D < 0 */
                 printEquationAndD();
                 System.out.println(dNegative);
-            } else if (isZero(D)) { /* 3.2. иначе (else) если (if) D = 0 */
+            } else if (Check.isZero(D)) { /* 3.2. иначе (else) если (if) D = 0 */
                 x = ((-1) * b) / (2 * a);
                 printEquationAndD();
                 System.out.println(dZeroX + x);
@@ -139,36 +148,6 @@ public class Main {
         }
     } // end method solveQuadraticEquation()
 
-    /* Проверить пустое поле ввода или нет */
-    public static boolean isNotEmpty(double n) {
-        return String.valueOf(n).length() != 0; // если не пустое, вернуть true
-    } // end method isNotEmpty(double n)
-
-    /* Проверить number = 0 */
-    public static boolean isZero(double n) {
-        return n == 0; // если n = 0, вернуть true
-    } // end method isZero(double n)
-
-    /* Проверить number = variable */
-    public static boolean isEqualTo(double n, double v) {
-        return n == v; // если n = 0, вернуть true
-    } // end method isZero(double n, double v))
-
-    /* Проверить 3 чисела на равенство нулю */
-    public static boolean isZero(double n1, double n2, double n3) {
-        return n1 == 0 && n2 == 0 && n3 == 0; // если все n = 0, вернуть true
-    } // end method isZero(double n1, double n2, double n3)
-
-    /* Проверить number < 0, отрицательное число */
-    public static boolean isNegative(double n) {
-        return n < 0; // если n = 0, вернуть true
-    } // end method isNegative(double n)
-
-    /* Проверить number > 0, положительное число */
-    public static boolean isPositive(double n) {
-        return n > 0; // если n = 0, вернуть true
-    } // end method isPositive(double n)
-
     /* Вывести уравнение и дискриминант */
     public static void printEquationAndD() {
         System.out.println(equation);
@@ -176,7 +155,7 @@ public class Main {
     } // end method printEquationAndD()
 
 
-    //!!!!
+    /* Получить данные от пользователя */
     public static double getUserInput() {
         Scanner userInput = new Scanner(System.in);
         double num = 0;
