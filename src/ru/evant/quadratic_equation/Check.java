@@ -1,6 +1,6 @@
 package ru.evant.quadratic_equation;
 
-/**
+/*
  * Автор: Евсеев Антон
  * Создано:27 мая 2021 года
  */
