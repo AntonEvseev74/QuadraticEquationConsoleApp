@@ -1,5 +1,6 @@
 package ru.evant.quadratic_equation;
 
+import javax.management.StringValueExp;
 import java.util.Scanner;
 
 /**
@@ -24,9 +25,9 @@ import java.util.Scanner;
     Создано:27 мая 2021 года
 */
 
-  // Ошибки
-  //  Реализовать проверку ввода пользователя (если пользователь ничего ни ввел либо ввел не число)
-  //  Исправить вывод уравнения, посредством проверок полярности числа вывести соответствующие знаки (+ или -)
+// Ошибки
+//  Реализовать проверку ввода пользователя (если пользователь ввел не число)
+    // Реализовать решение простого уравнения
 
 public class Main {
 
@@ -54,6 +55,7 @@ public class Main {
         String enterValueB = "Введите значение переменной B:\n>: ";
         String enterValueC = "Введите значение переменной C:\n>: ";
         String equation; // уравнение
+        String sectionA, sectionB, section3; // математический оператор (+ или -)
         String dD; // дискриминант
         String dNegative = "Уравнение не имеет корней!";
         String dZeroX = "Уравнение имеет один корень.\nx = ";
@@ -71,35 +73,103 @@ public class Main {
         /* 1. Получить данные от пользователя */
         System.out.print(enterValueA);  // вывод в консоль. запрос данных
         a = userInput.nextDouble();     // получить данные введенные пользователем и присвоить их переменной a
+        // Проверить поле ввода, если не пустое выполняем код далее, иначе присваиваем переменной значение 1
+        if (String.valueOf(a).length() != 0) {
+            /* проверка на знак оператора + или -, или равенство нулю */
+            if (a > 0) {
+                sectionA = "" + a + "x²";
+            } else if (a == 0) {
+                sectionA = "";
+            } else {
+                sectionA = "" + a + "x²";
+            }
+        } else {
+            a = 1;
+            if (a > 0) {
+                sectionA = "" + a + "x² ";
+            } else if (a == 0) {
+                sectionA = "";
+            } else {
+                sectionA = "" + a + "x²";
+            }
+        }
         System.out.print(enterValueB);  // вывод в консоль. запрос данных
         b = userInput.nextDouble();     // получить данные введенные пользователем и присвоить их переменной b
+        if (String.valueOf(b).length() != 0) {
+            if (b > 0) {
+                sectionB = "+" + b + "x";
+            } else if (b == 0) {
+                sectionB = "";
+            } else {
+                sectionB = "" + b + "x";
+            }
+        } else {
+            b = 1;
+            if (b > 0) {
+                sectionB = "+" + b + "x";
+            } else if (b == 0) {
+                sectionB = "";
+            } else {
+                sectionB = "" + b + "x";
+            }
+        }
         System.out.print(enterValueC);  // вывод в консоль. запрос данных
         c = userInput.nextDouble();     // получить данные введенные пользователем и присвоить их переменной c
+        if (String.valueOf(b).length() != 0) {
+            if (c > 0) {
+                section3 = "+" + c + "=0";
+            } else if (c == 0) {
+                section3 = "=0";
+            } else {
+                section3 = "" + c + "=0";
+            }
+        } else {
+            c = 1;
+            if (c > 0) {
+                section3 = "+" + c + "=0";
+            } else if (c == 0) {
+                section3 = "=0";
+            } else {
+                section3 = "" + c + "=0";
+            }
+        }
 
-        equation = a + "x²" + b + "x" + c;
+        if (a == 0 && b == 0 && c == 0) {
+            equation = "0 = 0";
+        } else {
+            equation = sectionA + sectionB + section3;
+        }
 
         /* 2. Вычислить Дискриминант */
-        D = Math.pow(b,2) - 4 * a * c; // Math.pow(b,2) -> использовать метод pow(x, n) класса Math -> pow - возвести число в степень, x - число, n - степень
-        dD = "D = " + D;
+        if (a == 0 && b == 0 && c == 0) {
+            System.out.println(equation);
+        } else if (a == 0) {
+            /* решить простое уравнение */
 
-        /* 3. Решить уравнение и 4. Вывести результат*/
+        } else {
+            D = Math.pow(b, 2) - 4 * a * c; // Math.pow(b,2) -> использовать метод pow(x, n) класса Math -> pow - возвести число в степень, x - число, n - степень
+            dD = "D = " + D;
 
-        if (D < 0){ /* 3.1. если (if) D < 0 */
-            System.out.println(equation);
-            System.out.println(dD);
-            System.out.println(dNegative);
-        } else if (D == 0) { /* 3.2. иначе (else) если (if) D = 0 */
-            x =((-1)*b) / (2 * a);
-            System.out.println(equation);
-            System.out.println(dD);
-            System.out.println(dZeroX + x);
-        } else { /* 3.3. иначе (else) */
-            x1 = ((-1) * b - Math.sqrt(D)) / (2 * a); // sqrt(n) -> Корень квадратный из n
-            x2 = ((-1) * b + Math.sqrt(D)) / (2 * a);
-            System.out.println(equation);
-            System.out.println(dD);
-            System.out.println(dPositiveX1 + x1);
-            System.out.println(dPositiveX2 + x2);
+            /* 3. Решить уравнение и 4. Вывести результат*/
+
+            if (D < 0) { /* 3.1. если (if) D < 0 */
+                System.out.println(equation);
+                System.out.println(dD);
+                System.out.println(dNegative);
+            } else if (D == 0) { /* 3.2. иначе (else) если (if) D = 0 */
+                x = ((-1) * b) / (2 * a);
+                System.out.println(equation);
+                System.out.println(dD);
+                System.out.println(dZeroX + x);
+            } else { /* 3.3. иначе (else) */
+                x1 = ((-1) * b - Math.sqrt(D)) / (2 * a); // sqrt(n) -> Корень квадратный из n
+                x2 = ((-1) * b + Math.sqrt(D)) / (2 * a);
+                System.out.println(equation);
+                System.out.println(dD);
+                System.out.println(dPositiveX1 + x1);
+                System.out.println(dPositiveX2 + x2);
+            }
         }
     }
 }
+
