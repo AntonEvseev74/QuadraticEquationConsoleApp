@@ -50,7 +50,7 @@ public class Main {
     static String dNegative = "Уравнение не имеет корней!";
     static String dZeroX = "Уравнение имеет один корень.\nx = ";
     static String dPositiveX1 = "Уравнение имеет два кореня.\nx1 = ";
-    static String dPositiveX2 = "\nx2 = ";
+    static String dPositiveX2 = "x2 = ";
 
     /*
       Создать объект -> Scanner и объявить на него ссылку -> userInput
