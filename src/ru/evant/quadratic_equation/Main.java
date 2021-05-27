@@ -35,6 +35,29 @@ public class Main {
          */
     static double a, b, c, D, x, x1, x2;
 
+    /*
+          Объявить и инициализировать ссылочные перменные строкового типа, тип - String.
+          Которые ссылаются на строки указанные в "".
+          Необходимые для ввода и вывода данных
+         */
+    static String formula = "Решение квадратных уравнений, типа:\n    Ax² + Bx + C = 0";
+    static String enterValueA = "Введите значение переменной А:\n>: ";
+    static String enterValueB = "Введите значение переменной B:\n>: ";
+    static String enterValueC = "Введите значение переменной C:\n>: ";
+    static String equation; // уравнение
+    static String sectionA, sectionB, section3; // математический оператор (+ или -)
+    static String dD; // дискриминант
+    static String dNegative = "Уравнение не имеет корней!";
+    static String dZeroX = "Уравнение имеет один корень.\nx = ";
+    static String dPositiveX1 = "Уравнение имеет два кореня.\nx1 = ";
+    static String dPositiveX2 = "\nx2 = ";
+
+    /*
+      Создать объект -> Scanner и объявить на него ссылку -> userInput
+      Необходимо для получения данных от пользователя.
+     */
+    static Scanner userInput = new Scanner(System.in);
+
     public static void main(String[] args) {
 
         solveQuadraticEquation(); // Решить квадратное уравнение
@@ -42,30 +65,6 @@ public class Main {
     }
 
     private static void solveQuadraticEquation() {
-
-        /*
-          Объявить и инициализировать ссылочные перменные строкового типа, тип - String.
-          Которые ссылаются на строки указанные в "".
-          Необходимые для ввода и вывода данных
-         */
-        String formula = "Решение квадратных уравнений, типа:\n    Ax² + Bx + C = 0";
-        String enterValueA = "Введите значение переменной А:\n>: ";
-        String enterValueB = "Введите значение переменной B:\n>: ";
-        String enterValueC = "Введите значение переменной C:\n>: ";
-        String equation; // уравнение
-        String sectionA, sectionB, section3; // математический оператор (+ или -)
-        String dD; // дискриминант
-        String dNegative = "Уравнение не имеет корней!";
-        String dZeroX = "Уравнение имеет один корень.\nx = ";
-        String dPositiveX1 = "Уравнение имеет два кореня.\nx1 = ";
-        String dPositiveX2 = "\nx2 = ";
-
-        /*
-          Создать объект -> Scanner и объявить на него ссылку -> userInput
-          Необходимо для получения данных от пользователя.
-         */
-        Scanner userInput = new Scanner(System.in);
-
         System.out.println(formula);      // вывод в консоль. формула
 
         /* 1. Получить данные от пользователя */
@@ -95,7 +94,7 @@ public class Main {
 
         /* B */
         System.out.print(enterValueB);  // вывод в консоль. запрос данных
-            b = userInput.nextDouble();     // получить данные введенные пользователем и присвоить их переменной b
+        b = userInput.nextDouble();     // получить данные введенные пользователем и присвоить их переменной b
         if (String.valueOf(b).length() != 0) {
             if (b > 0) {
                 sectionB = "+" + b + "x";
@@ -175,7 +174,5 @@ public class Main {
             }
         }
     }
-
-
 }
 
